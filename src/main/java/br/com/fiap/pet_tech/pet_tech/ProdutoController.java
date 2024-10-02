@@ -17,6 +17,7 @@ public class ProdutoController {
   @Autowired
   private ProdutoRepository produtoRepository;
 
+  @GetMapping
   public ResponseEntity<Collection<Produto>> findAll() {
     var produtos = service.findAll();
     return ResponseEntity.ok(produtos);
@@ -35,7 +36,7 @@ public class ProdutoController {
     return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(produto);
   }
 
-  @PutMapping("{/id}")
+  @PutMapping("/{id}")
   public ResponseEntity<Produto> update(
           @PathVariable UUID id, @RequestBody Produto produto) {
 
@@ -43,7 +44,7 @@ public class ProdutoController {
     return ResponseEntity.ok(produto);
   }
 
-  @DeleteMapping("{/id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<Void> delete(@PathVariable UUID id) {
     service.delete(id);
     return ResponseEntity.noContent().build();
